@@ -1,5 +1,6 @@
 Each class or module should be designed in a way that it’s open for extension but closed for modification.
-In other words, you should be able to add new functionality to your code without having to modify the existing code. In the context of Django REST Framework (DRF), you can achieve this by extending Serializer class created before to create new Serializer with different functionality.
+In other words, you should be able to add new functionality to your code without having to modify the existing code.
+In the context of Django REST Framework (DRF), you can achieve this by extending Serializer class created before to create new Serializer with different functionality.
 
 class BlogPostSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=100)
