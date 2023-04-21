@@ -1,0 +1,35 @@
+That any subclass can be used in place of its superclass without causing any issues.
+In the context of Django REST Framework (DRF), this means that you can use different serializers in a view as long as they inherit from the same base serializer class and can handle the same input and output data.
+
+class BlogPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BlogPost
+        fields = '__all__'
+        
+class AuthenticatedBlogPostSerializer(BlogPostSerializer):
+    is_liked = serializers.SerializerMethodField()
+
+    def get_is_liked(self, obj):
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            return obj.likes.filter(user=request.user).exists()
+        return False
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['is_liked'] = self.get_is_liked(instance)
+        return rep
+
+class BlogPostListAPIView(ListAPIView):
+    queryset = BlogPost.objects.all()
+    
+    def get_serializer_class(self):
+        if self.request.user.is_authenticated:
+            return AuthenticatedBlogPostSerializer
+        else:
+            return BlogPostSerializer
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({'request': self.request})
+        return context        

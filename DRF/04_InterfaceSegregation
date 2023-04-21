@@ -1,0 +1,7 @@
+A class should have only the methods it needs. This simply means that you should only include the essential methods in a class and avoid adding any unnecessary methods that might not be used. In the context of Django REST Framework (DRF), it could mean having a view that only contains the methods needed for a specific functionality, even if it is more than one method.
+
+class BlogPostListAPIView(APIView): 
+    def get(self, request): 
+        queryset = BlogPost.objects.all() 
+        serializer = BlogPostSerializer(queryset, many=True) 
+        return Response(serializer.data)

@@ -1,0 +1,15 @@
+Suggest that high-level modules should not depend on low-level modules, but instead, both should depend on abstractions. In the context of Django REST Framework (DRF), this means that you should rely on abstract interfaces rather than concrete implementations.
+
+class BlogPostSerializer(serializers.ModelSerializer):
+    author = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = BlogPost
+        fields = '__all__'
+        
+    def get_author(self, obj):
+        return {
+            'id': obj.author.id,
+            'username': obj.author.username,
+            'email': obj.author.email,
+        }

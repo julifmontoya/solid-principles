@@ -1,0 +1,7 @@
+Each class should only have one specific purpose or responsibility.
+In the context of Django REST Framework (DRF) a view should only handle one resource.
+For example, if you have a blog application, you should have separate views for creating a blog post and updating a blog post. This view is responsible for creating a new blog post. It doesn’t handle any other actions, such as updating or deleting blog posts.
+
+class BlogPostCreateAPIView(CreateAPIView):
+    queryset = BlogPost.objects.all()
+    serializer_class = BlogPostSerializer
