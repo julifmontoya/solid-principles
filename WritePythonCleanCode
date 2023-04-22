@@ -1,0 +1,24 @@
+-----
+Naming Convection
+-----
+class names should be CamelCase (MyClass)
+variable names should be snake_case and all lowercase (first_name)
+function names should be snake_case and all lowercase (quick_sort())
+constants should be snake_case and all uppercase (PI = 3.14159)
+modules should have short, snake_case names and all lowercase (numpy)
+single quotes and double quotes are treated the same (just pick one and be consistent)
+
+-----
+DRY Principle
+-----
+Don’t Repeat Yourself
+
+-----
+KISS Principle
+-----
+Keep It Simple, Stupid
+
+-----
+YAGNI Principle
+-----
+You Ain’t Gonna Need It
